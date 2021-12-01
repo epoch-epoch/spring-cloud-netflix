@@ -66,6 +66,9 @@ public class SendErrorFilter extends ZuulFilter {
 				&& !ctx.getBoolean(SEND_ERROR_FILTER_RAN, false);
 	}
 
+	/**
+	 * 用请求上下文的错误信息来组织成一个forward到API网关/error错误端点的请求来产生错误响应
+	 */
 	@Override
 	public Object run() {
 		try {

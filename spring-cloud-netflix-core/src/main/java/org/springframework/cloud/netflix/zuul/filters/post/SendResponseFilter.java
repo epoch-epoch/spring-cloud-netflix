@@ -101,6 +101,9 @@ public class SendResponseFilter extends ZuulFilter {
 		return SEND_RESPONSE_FILTER_ORDER;
 	}
 
+	/**
+	 * 只处理包含zuulResponseHeaders,responseDataStream或responseBody的请求
+	 */
 	@Override
 	public boolean shouldFilter() {
 		RequestContext context = RequestContext.getCurrentContext();
@@ -110,6 +113,9 @@ public class SendResponseFilter extends ZuulFilter {
 					|| context.getResponseBody() != null);
 	}
 
+	/**
+	 * 用请求上下文的响应信息来组织需要发送回客户端的响应内容
+	 */
 	@Override
 	public Object run() {
 		try {

@@ -67,6 +67,10 @@ public class Servlet30WrapperFilter extends ZuulFilter {
 		return true; // TODO: only if in servlet 3.0 env
 	}
 
+	/**
+	 * @dupan
+	 * 将原始的HttpServletRequest包装成Servlet30RequestWrapper对象
+	 */
 	@Override
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();

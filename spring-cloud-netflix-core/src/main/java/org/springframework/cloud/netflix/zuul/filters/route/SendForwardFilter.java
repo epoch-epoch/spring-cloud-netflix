@@ -48,6 +48,9 @@ public class SendForwardFilter extends ZuulFilter {
 		return SEND_FORWARD_FILTER_ORDER;
 	}
 
+	/**
+	 * forward.to请求转发
+	 */
 	@Override
 	public boolean shouldFilter() {
 		RequestContext ctx = RequestContext.getCurrentContext();
@@ -55,6 +58,9 @@ public class SendForwardFilter extends ZuulFilter {
 				&& !ctx.getBoolean(SEND_FORWARD_FILTER_RAN, false);
 	}
 
+	/**
+	 * 处理路由规则中的forward本地跳转配置
+	 */
 	@Override
 	public Object run() {
 		try {

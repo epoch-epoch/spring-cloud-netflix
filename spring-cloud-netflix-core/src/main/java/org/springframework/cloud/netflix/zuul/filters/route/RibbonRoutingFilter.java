@@ -95,6 +95,10 @@ public class RibbonRoutingFilter extends ZuulFilter {
 		return RIBBON_ROUTING_FILTER_ORDER;
 	}
 
+	/**
+	 * @dupan
+	 * ServiceId请求转发
+	 */
 	@Override
 	public boolean shouldFilter() {
 		RequestContext ctx = RequestContext.getCurrentContext();
@@ -102,6 +106,10 @@ public class RibbonRoutingFilter extends ZuulFilter {
 				&& ctx.sendZuulResponse());
 	}
 
+	/**
+	 * @dupan
+	 * 通过使用Ribbon和Hystrix来向服务实例发起请求，并将服务实例的请求结果返回
+	 */
 	@Override
 	public Object run() {
 		RequestContext context = RequestContext.getCurrentContext();

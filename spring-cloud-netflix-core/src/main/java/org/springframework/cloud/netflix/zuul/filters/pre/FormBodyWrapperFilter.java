@@ -112,6 +112,10 @@ public class FormBodyWrapperFilter extends ZuulFilter {
 				DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null;
 	}
 
+	/**
+	 * @dupan
+	 * 包装请求体:将符合要求的请求体包装成FormBodyRequestWrapper对象
+	 */
 	@Override
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
@@ -127,6 +131,7 @@ public class FormBodyWrapperFilter extends ZuulFilter {
 			}
 		}
 		else {
+			// 包装请求体
 			wrapper = new FormBodyRequestWrapper(request);
 			ctx.setRequest(wrapper);
 		}

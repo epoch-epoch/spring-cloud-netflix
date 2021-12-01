@@ -99,6 +99,10 @@ public class PreDecorationFilter extends ZuulFilter {
 		return PRE_TYPE;
 	}
 
+	/**
+	 * @dupan
+	 * 判断当前请求上下文中是否存在forward.to和serviceId参数，如果都不存在，那么它就会执行具体过滤器的操作
+	 */
 	@Override
 	public boolean shouldFilter() {
 		RequestContext ctx = RequestContext.getCurrentContext();

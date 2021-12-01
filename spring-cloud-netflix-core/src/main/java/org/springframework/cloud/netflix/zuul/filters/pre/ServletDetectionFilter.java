@@ -32,51 +32,56 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 /**
  * Detects whether a request is ran through the {@link DispatcherServlet} or {@link ZuulServlet}.
  * The purpose was to detect this up-front at the very beginning of Zuul filter processing
- *  and rely on this information in all filters.
- *  RequestContext is used such that the information is accessible to classes 
- *  which do not have a request reference.
+ * and rely on this information in all filters.
+ * RequestContext is used such that the information is accessible to classes
+ * which do not have a request reference.
+ *
  * @author Adrian Ivan
  */
 public class ServletDetectionFilter extends ZuulFilter {
 
-	public ServletDetectionFilter() {
-	}
+    public ServletDetectionFilter() {
+    }
 
-	@Override
-	public String filterType() {
-		return PRE_TYPE;
-	}
+    @Override
+    public String filterType() {
+        return PRE_TYPE;
+    }
 
-	/**
-	 * Must run before other filters that rely on the difference between 
-	 * DispatcherServlet and ZuulServlet.
-	 */
-	@Override
-	public int filterOrder() {
-		return SERVLET_DETECTION_FILTER_ORDER;
-	}
+    /**
+     * Must run before other filters that rely on the difference between
+     * DispatcherServlet and ZuulServlet.
+     */
+    @Override
+    public int filterOrder() {
+        return SERVLET_DETECTION_FILTER_ORDER;
+    }
 
-	@Override
-	public boolean shouldFilter() {
-		return true; 
-	}
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
 
-	@Override
-	public Object run() {
-		RequestContext ctx = RequestContext.getCurrentContext();
-		HttpServletRequest request = ctx.getRequest();
-		if (!(request instanceof HttpServletRequestWrapper) 
-				&& isDispatcherServletRequest(request)) {
-			ctx.set(IS_DISPATCHER_SERVLET_REQUEST_KEY, true);
-		} else {
-			ctx.set(IS_DISPATCHER_SERVLET_REQUEST_KEY, false);
-		}
+    /**
+     * @dupan
+	 * 检查当前请求是否是通过Spring的DispatcherServlet处理运行的
+     */
+    @Override
+    public Object run() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
+        if (!(request instanceof HttpServletRequestWrapper)
+                && isDispatcherServletRequest(request)) {
+            ctx.set(IS_DISPATCHER_SERVLET_REQUEST_KEY, true);
+        } else {
+            ctx.set(IS_DISPATCHER_SERVLET_REQUEST_KEY, false);
+        }
 
-		return null;
-	}
-	
-	private boolean isDispatcherServletRequest(HttpServletRequest request) {
-		return request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null;
-	}	 	
+        return null;
+    }
+
+    private boolean isDispatcherServletRequest(HttpServletRequest request) {
+        return request.getAttribute(DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null;
+    }
 
 }
