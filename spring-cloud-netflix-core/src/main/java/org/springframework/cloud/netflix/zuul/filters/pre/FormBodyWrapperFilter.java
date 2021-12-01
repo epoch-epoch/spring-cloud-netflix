@@ -113,7 +113,6 @@ public class FormBodyWrapperFilter extends ZuulFilter {
 	}
 
 	/**
-	 * @dupan
 	 * 包装请求体:将符合要求的请求体包装成FormBodyRequestWrapper对象
 	 */
 	@Override

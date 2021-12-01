@@ -68,7 +68,6 @@ public class Servlet30WrapperFilter extends ZuulFilter {
 	}
 
 	/**
-	 * @dupan
 	 * 将原始的HttpServletRequest包装成Servlet30RequestWrapper对象
 	 */
 	@Override

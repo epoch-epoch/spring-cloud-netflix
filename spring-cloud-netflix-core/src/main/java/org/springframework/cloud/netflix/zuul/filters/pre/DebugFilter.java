@@ -53,7 +53,6 @@ public class DebugFilter extends ZuulFilter {
 	}
 
 	/**
-	 * @dupan
 	 * 根据ZUUL_DEBUG_REQUEST和请求中的debug参数决定是否执行过滤器中的操作
 	 */
 	@Override

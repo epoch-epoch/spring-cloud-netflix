@@ -63,7 +63,6 @@ public class ServletDetectionFilter extends ZuulFilter {
     }
 
     /**
-     * @dupan
 	 * 检查当前请求是否是通过Spring的DispatcherServlet处理运行的
      */
     @Override
